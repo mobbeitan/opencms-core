@@ -63,6 +63,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.logging.Log;
 
 import org.w3c.dom.Document;
+import javax.xml.XMLConstants;
 
 /**
  * Transforms all resources of a given type by
@@ -364,6 +365,13 @@ public class CmsXmlFileTransformer {
         dbf.setIgnoringElementContentWhitespace(true);
         dbf.setIgnoringComments(true);
         try {
+            dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            dbf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            dbf.setXIncludeAware(false);
+            dbf.setExpandEntityReferences(false);
             DocumentBuilder db = dbf.newDocumentBuilder();
             db.setEntityResolver(new CmsXmlEntityResolver(m_offlineCms));
             Document doc1 = db.parse(new ByteArrayInputStream(xml1));
