@@ -12,7 +12,7 @@
 <html>
   <head>
     <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<%= wp.getEncoding() %>">
-    <title><%= wp.key("label.wptitle") %> <%= wp.getSettings().getUser().getName() %>@<%= request.getServerName() %></title>
+    <title><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("label.wptitle"))) %> <%= wp.getSettings().getUser().getName() %>@<%= request.getServerName() %></title>
   </head>
   
   <frameset rows="57,*" border="0" frameborder="0" framespacing="0">
