@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Action element class for displaying the XML sitemap from a JSP.<p>
