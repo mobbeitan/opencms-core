@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page buffer="none" import="org.opencms.workplace.*" %><%
 
 CmsLoginUserAgreement wp = new CmsLoginUserAgreement(pageContext, request, response);
@@ -51,7 +52,7 @@ default:
 
 <%= wp.dialogEnd() %>
 <%= wp.bodyEnd() %>
-<%= wp.htmlEnd() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
 <%
  }
 //////////////////// end of switch statement 
