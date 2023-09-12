@@ -33,6 +33,7 @@ import org.opencms.util.CmsStringUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 
 /**
  * Implements a RFS file based disk cache, that handles parameter based versions of VFS files,
@@ -71,6 +72,7 @@ public class CmsVfsDiskCache {
      */
     public static File saveFile(String rfsName, byte[] content) throws IOException {
 
+        ensurePathIsRelative(rfsName);
         File f = new File(rfsName);
         File p = f.getParentFile();
         if (!p.exists()) {
@@ -82,6 +84,37 @@ public class CmsVfsDiskCache {
         fs.write(content);
         fs.close();
         return f;
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
