@@ -112,7 +112,7 @@ if (wp.showSiteSelector()) {
 <%= wp.buttonBarSeparator(5, 0) %>          
 <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.buttonBarLabel(org.opencms.workplace.Messages.GUI_LABEL_VIEW_0))) %>
 <td>
-<form style="margin: 0; padding: 0;" name="wpViewSelect" method="post" action="<%= cms.link(cms.getRequestContext().getUri()) %>">
+<form style="margin: 0; padding: 0;" name="wpViewSelect" method="post" action="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link(cms.getRequestContext().getUri()))) %>">
 <div>
 <%= wp.getViewSelect("name=\"wpView\" style=\"width:150px\" onchange=\"document.forms.wpViewSelect.submit()\"") %>
 <input type="hidden" name="<%= CmsFrameset.PARAM_WP_FRAME %>" value="head">
