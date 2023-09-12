@@ -260,7 +260,7 @@ function checkField(elementId, checkFieldId) {
   <td><input type="text" id="TBorderColor" size=7 maxlength="7" name="TBorderColor" style="width:150px;" onkeyup="previewColor('TBorderColor', 'TBorderColor');"></td>
   <td><table border="0" cellpadding="0" cellspacing="0">
   		<tr>
-  			<%= wp.button("javascript:openColorWindow('TBorderColor');", null, "color_fill", org.opencms.workplace.editors.Messages.GUI_BUTTON_COLOR_0, buttonStyle) %>
+  			<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:openColorWindow('TBorderColor');", null, "color_fill", org.opencms.workplace.editors.Messages.GUI_BUTTON_COLOR_0, buttonStyle))) %>
   		</tr>
   	  </table>  
   </td>
