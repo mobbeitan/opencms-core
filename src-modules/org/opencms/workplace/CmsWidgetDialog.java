@@ -58,6 +58,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Base class for dialogs that use the OpenCms widgets without XML content.<p>
