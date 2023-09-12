@@ -33,6 +33,9 @@ import org.opencms.util.CmsStringUtil;
 import org.opencms.workplace.CmsWorkplace;
 
 import java.io.File;
+import java.io.IOException;
+
+import java.net.URI;
 
 /**
  * Default skeleton for an html icon button.<p>
@@ -221,6 +224,7 @@ public abstract class A_CmsHtmlIconButton implements I_CmsHtmlIconButton {
                 icon.append("_disabled");
                 icon.append(iconPath.substring(iconPath.lastIndexOf('.')));
                 String resourcesRoot = OpenCms.getSystemInfo().getWebApplicationRfsPath() + "resources/";
+                ensurePathIsRelative(resourcesRoot + icon.toString());
                 File test = new File(resourcesRoot + icon.toString());
                 if (test.exists()) {
                     html.append(icon);
@@ -286,6 +290,37 @@ public abstract class A_CmsHtmlIconButton implements I_CmsHtmlIconButton {
             html.append("</div>\n");
         }
         return html.toString();
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
