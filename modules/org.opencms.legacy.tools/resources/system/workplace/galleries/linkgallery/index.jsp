@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.util.CmsStringUtil, org.opencms.workplace.galleries.*" %><%
 	
 //initialize the gallery instance
@@ -53,7 +54,7 @@ String uploadVariant = wp.getSettings().getUserSettings().getUploadVariant().toS
 <script >
 
 //link to ajaxcalls.jsp of the gallery
-var vfsPathAjaxJsp = "<%= wp.getJsp().link("/system/workplace/galleries/linkgallery/ajaxcalls.jsp") %>";
+var vfsPathAjaxJsp = "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getJsp().link("/system/workplace/galleries/linkgallery/ajaxcalls.jsp"))) %>";
 var vfsPathPrefixItems = "<%= org.opencms.workplace.CmsWorkplace.getSkinUri() %>components/galleries/img/";
 
 var initValues;
