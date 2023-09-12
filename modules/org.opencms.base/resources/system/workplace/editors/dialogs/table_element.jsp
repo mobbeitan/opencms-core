@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.*" %><%	
 
 	// initialize the workplace class
@@ -239,7 +240,7 @@ function checkField(elementId, checkFieldId) {
   <td colspan="2"><select name="TDVAlign" id="TDVAlign" size="1" style="width:150px;">
         <option value=""><%= wp.key(org.opencms.workplace.editors.Messages.GUI_EDITOR_DIALOG_TABLE_NOTSPECIFIED_0) %></option>
         <option value="top"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNTOP_0) %></option>
-        <option value="middle"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNMIDDLE_0) %></option>
+        <option value="middle"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNMIDDLE_0))) %></option>
         <option value="bottom"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNBOTTOM_0) %></option>        
         <option value="baseline"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNBASELINE_0) %></option>
       </select>
