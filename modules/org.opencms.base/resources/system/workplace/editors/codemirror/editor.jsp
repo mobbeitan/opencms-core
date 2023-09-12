@@ -278,7 +278,7 @@ if (modeName.equals("text/html")) {
 <%= wp.buttonBarSeparator(5, 5) %>
 <td>
 	<select name="fontsize" onchange="setEditorSyntax(this.value);" title="<%= wp.key("GUI_EDITOR_SELECT_SYNTAX_0") %>">
-		<option value="-">--<%= wp.key("GUI_EDITOR_SELECT_SYNTAX_0") %>--</option>
+		<option value="-">--<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_SELECT_SYNTAX_0"))) %>--</option>
 		<option value="css"<% if (modeName.equals("css")) {%> selected="selected"<%}%>>CSS</option>
 		<option value="text/html"<% if (modeName.equals("text/html")) {%> selected="selected"<%}%>>HTML</option>
 		<option value="javascript"<% if (modeName.equals("javascript")) {%> selected="selected"<%}%>>Javascript</option>
