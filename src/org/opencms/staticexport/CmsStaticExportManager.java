@@ -1383,6 +1383,8 @@ public class CmsStaticExportManager implements I_CmsEventListener {
                 } catch (CmsVfsResourceNotFoundException e) {
                     // resource has been deleted, so we are not able to get the right extension from the properties
                     // try to figure out the right extension from file system
+                    ensurePathIsRelative(CmsFileUtil.normalizePath(
+                            getExportPath(cms.getRequestContext().addSiteRoot(vfsName)) + rfsName));
                     File rfsFile = new File(
                         CmsFileUtil.normalizePath(
                             getExportPath(cms.getRequestContext().addSiteRoot(vfsName)) + rfsName));
@@ -1442,6 +1444,37 @@ public class CmsStaticExportManager implements I_CmsEventListener {
             // this is a link across rfs rules
             return getRfsPrefix(cms.getRequestContext().getSiteRoot() + "/").concat(rfsName);
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
