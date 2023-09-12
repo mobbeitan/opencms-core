@@ -11,4 +11,4 @@
 //-->
 </script>
 <% wp.actionCloseDialog(); %>
-<%= wp.htmlEnd() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
