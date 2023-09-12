@@ -29,7 +29,7 @@ default:
 
 	wp.setParamAction(CmsLoginUserAgreement.DIALOG_TYPE);
 
-%><%= wp.htmlStart() %>
+%><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart())) %>
 <%= wp.bodyStart("dialog") %>
 
 <%= wp.dialogStart() %>
