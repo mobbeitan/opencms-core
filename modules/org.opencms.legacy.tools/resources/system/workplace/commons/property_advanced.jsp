@@ -85,7 +85,7 @@ function checkName() {
 
 <table border="0" width="100%">
 <tr>
-	<td style="white-space: nowrap;" unselectable="on"><%= wp.key(Messages.GUI_PROPERTY_NEW_0) %></td>
+	<td style="white-space: nowrap;" unselectable="on"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_PROPERTY_NEW_0))) %></td>
 	<td class="maxwidth"><input id="<%= wp.PARAM_NEWPROPERTY %>" name="<%= wp.PARAM_NEWPROPERTY %>" type="text" value="" class="maxwidth" onKeyup="checkName();" on></td>
 </tr>
 </table>
