@@ -217,7 +217,7 @@ function checkField(elementId, checkFieldId) {
 
 <table border="0" cellpadding="3" cellspacing="0">
 <tr>
-  <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_HEIGHT_0) %>:</td>
+  <td style="white-space: nowrap;"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_HEIGHT_0))) %>:</td>
   <td><input id="TDHeight" type="text" size="7" maxlength="7" style="width:150px;" name="TDHeight" onkeypress="event.returnValue=IsDigit();"></td>
   <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_BORDERINFO_0)%></td>
 </tr>
