@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.galleries.*" %><%
 
 A_CmsAjaxGallery wp = new CmsAjaxImageGallery(pageContext, request, response);
@@ -251,7 +252,7 @@ A_CmsAjaxGallery wp = new CmsAjaxImageGallery(pageContext, request, response);
 </div>
 
 <div class="buttons">
-	<button onclick="okPressed();"><%= wp.key(Messages.GUI_GALLERY_BUTTON_OK_0) %></button>
+	<button onclick="okPressed();"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_GALLERY_BUTTON_OK_0))) %></button>
 	<button onclick="parent.tb_remove();"><%= wp.key(Messages.GUI_GALLERY_BUTTON_CANCEL_0) %></button>
 </div>
 
