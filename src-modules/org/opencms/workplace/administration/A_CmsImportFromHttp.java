@@ -52,6 +52,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Abstract class to upload a zip file containing VFS resources with HTTP upload.<p>
