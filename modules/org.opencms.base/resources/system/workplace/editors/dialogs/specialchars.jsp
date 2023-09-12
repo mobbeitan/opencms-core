@@ -67,7 +67,7 @@ function insertChar(thechar) {
 <%= wp.bodyStart("dialog") %>
 
 <%= wp.dialogStart() %>
-<%= wp.dialogContentStart(dialogTitle) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.dialogContentStart(dialogTitle))) %>
 
 <table border="0" cellspacing="0"  cellpadding="0" class="chartable">
 	<colgroup>
