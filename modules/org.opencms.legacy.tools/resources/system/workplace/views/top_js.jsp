@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.explorer.*,
 	org.opencms.jsp.*"
@@ -67,7 +68,7 @@ function initialize_resources() {
 
 vi.iconPath="<%= wp.getResourceUri() %>";
 vi.skinPath="<%= org.opencms.workplace.CmsWorkplace.getSkinUri() %>";
-vi.stylePath="<%= org.opencms.workplace.CmsWorkplace.getStyleUri(wp.getJsp(),"workplace.css") %>";
+vi.stylePath="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(org.opencms.workplace.CmsWorkplace.getStyleUri(wp.getJsp(),"workplace.css"))) %>";
 <%= wp.buildContextMenues() %>
 
 } // initialize_resources()
