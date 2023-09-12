@@ -41,6 +41,9 @@ import org.apache.commons.collections.Closure;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import java.io.IOException;
+
+import java.net.URI;
 
 /**
  * Helper class to list files in modules which are missing from the modules' manifests.<p>
@@ -71,12 +74,44 @@ public class CmsModuleResourceChecker {
      */
     public void checkAllModules(String modulesPath) throws Exception {
 
+        ensurePathIsRelative(modulesPath);
         File modules = new File(modulesPath);
         for (File file : modules.listFiles()) {
             if (file.isDirectory()) {
                 checkModule(modules.getAbsolutePath(), file.getName());
             }
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
