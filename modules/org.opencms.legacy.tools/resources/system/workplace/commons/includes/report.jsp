@@ -563,7 +563,7 @@ function submitActionRefresh(para1, para2, para3) {
 </table>
 
 <table border="0" cellpadding="0" cellspacing="0" align="center"><tr>
-<td class="hide" style="width: 100%; text-align: center;" id="checkcontinue"><input type="checkbox" name="continuereport" id="continuereport" value="true">&nbsp;<%= wp.key(wp.getParamReportContinueKey()) %></td>
+<td class="hide" style="width: 100%; text-align: center;" id="checkcontinue"><input type="checkbox" name="continuereport" id="continuereport" value="true">&nbsp;<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(wp.getParamReportContinueKey()))) %></td>
 </tr></table>
 
 </form>
