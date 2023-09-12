@@ -131,7 +131,7 @@ function fillCategories(data) {
 		if (currCat.level > 0) {
 			actStyle = " style=\"margin-left: " + (currCat.level * 20) + "px;\"";
 		}
-		$("#categoryfolderlist").append("<div id=\""
+		$("#categoryfolderlist").append(DOMPurify.sanitize("<div id=\""
 			+ "category" + i
 			+ "\""
 			+ actClass
@@ -145,7 +145,7 @@ function fillCategories(data) {
 			+ currCat.title
 			+ "</span><span class=\"path\">"
 			+ currCat.path
-			+ "</span></div>"
+			+ "</span></div>")
 		);
 	}
 	categoriesLoaded = true;
