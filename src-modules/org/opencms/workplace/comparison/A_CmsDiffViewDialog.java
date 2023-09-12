@@ -45,6 +45,7 @@ import java.io.StringReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Provides a GUI for the configuration file comparison dialog.<p>
