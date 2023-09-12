@@ -20,7 +20,7 @@ int buttonStyle = wp.getSettings().getUserSettings().getEditorButtonStyle();
 <!--
 	// Ask user whether he really wants to leave 
 	function confirmExit()	{
-		if (confirm ("<%= wp.key("admin.message.exit") %>")) {
+		if (confirm ("<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("admin.message.exit"))) %>")) {
 <% if (wp.isPopup() || CmsStringUtil.isEmpty(wp.getParamCloseLink()) || wp.getParamCloseLink().equals("null")) { 
     // this is a popup window, close it
 %>
