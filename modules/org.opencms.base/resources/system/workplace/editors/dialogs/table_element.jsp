@@ -227,7 +227,7 @@ function checkField(elementId, checkFieldId) {
   <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_BORDERINFO_0) %></td>
 </tr>  
 <tr>
-  <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_ALIGN_0)%>: </td>
+  <td style="white-space: nowrap;"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_ALIGN_0)))%>: </td>
   <td colspan="2"><select name="TDAlign" id="TDAlign" size="1" style="width:150px;">
         <option value=""><%= wp.key(org.opencms.workplace.editors.Messages.GUI_EDITOR_DIALOG_TABLE_NOTSPECIFIED_0)%></option>
         <option value="left"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_ALIGNLEFT_0)%></option>
