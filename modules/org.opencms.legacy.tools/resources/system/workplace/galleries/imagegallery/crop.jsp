@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.galleries.*" %><%
 
 A_CmsAjaxGallery wp = new CmsAjaxImageGallery(pageContext, request, response);
@@ -246,7 +247,7 @@ A_CmsAjaxGallery wp = new CmsAjaxImageGallery(pageContext, request, response);
 
 <div class="selection">
 	<div class="width"><%= wp.key(Messages.GUI_IMAGEGALLERY_CROP_WIDTH_0) %> <span id="w"></span></div>
-	<div class="height"><%= wp.key(Messages.GUI_IMAGEGALLERY_CROP_HEIGHT_0) %> <span id="h"></span></div>
+	<div class="height"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_IMAGEGALLERY_CROP_HEIGHT_0))) %> <span id="h"></span></div>
 	<div class="ratio"><%= wp.key(Messages.GUI_IMAGEGALLERY_CROP_RATIO_0) %> <span id="r"></span></div>
 </div>
 
