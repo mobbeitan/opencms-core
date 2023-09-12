@@ -61,7 +61,7 @@ default:
 	var content="<%= wp.getParamContent() %>";
 
 	// Workplacepath needed in included javascript files
-	var workplacePath="<%= cms.link("/system/workplace/") %>";
+	var workplacePath="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link("/system/workplace/"))) %>";
 	
 	// action parameters of the form
 	var actionExit = "<%= CmsEditor.EDITOR_EXIT %>";
