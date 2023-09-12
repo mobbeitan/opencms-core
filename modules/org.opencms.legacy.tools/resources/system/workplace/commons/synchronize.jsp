@@ -56,7 +56,7 @@ default:
 
 <%= wp.dialogEnd() %>
 <%= wp.bodyEnd() %>
-<%= wp.htmlEnd() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
 <%
 } 
 //////////////////// end of switch statement 
