@@ -167,7 +167,7 @@ function fillGalleries(data, showActiveGallery) {
 			// this is the active gallery, set active class
 			actClass = " class=\"active\"";
 		}
-		$("#galleryfolderlist").append("<div id=\""
+		$("#galleryfolderlist").append(DOMPurify.sanitize("<div id=\""
 			+ "gallery" + i
 			+ "\""
 			+ actClass
@@ -180,7 +180,7 @@ function fillGalleries(data, showActiveGallery) {
 			+ currGall.title
 			+ "</span><span class=\"path\">"
 			+ currGall.path
-			+ "</span></div>"
+			+ "</span></div>")
 		);
 		if ((showActiveGallery == null || showActiveGallery == true) && currGall.active == true) {
 			// this is the active gallery, get the items for this gallery
