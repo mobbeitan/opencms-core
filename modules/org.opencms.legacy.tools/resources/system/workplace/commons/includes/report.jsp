@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.CmsReport,
 	org.opencms.workplace.CmsDialog,
@@ -265,7 +266,7 @@ var cssStyle =
 var pageStartSimple =
     "<html>\n<head>\n" +
     "<meta HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=<%= wp.getEncoding() %>'>\n" + 
-    "<link rel='stylesheet' type='text/css' href='<%= wp.getStyleUri("workplace.css") %>'>\n" +
+    "<link rel='stylesheet' type='text/css' href='<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getStyleUri("workplace.css"))) %>'>\n" +
     cssStyle +
     "</head>\n" +
     "<body style='background-color:/*begin-color Menu*/#f0f0f0/*end-color*/;'>\n" +   
