@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*,
 	org.opencms.jsp.*,
@@ -20,7 +21,7 @@
 <script > 
 function doReloadFoot() {
    <%if (OpenCms.getWorkplaceManager().isKeepAlive()) {%>
-	document.location.href="<%= cms.link("top_foot.jsp?wpFrame=foot") %>";
+	document.location.href="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link("top_foot.jsp?wpFrame=foot"))) %>";
    <%}%>
 }
 </script>
