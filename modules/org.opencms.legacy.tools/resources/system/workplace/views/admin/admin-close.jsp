@@ -14,7 +14,7 @@ int buttonStyle = wp.getSettings().getUserSettings().getEditorButtonStyle();
 <meta http-equiv="content-type" content="text/html; charset=<%= wp.getEncoding() %>">
 <title>External Administration View Tool Bar</title>
 
-<link rel=stylesheet type="text/css" href="<%= CmsWorkplace.getStyleUri(wp.getJsp())%>workplace.css">
+<link rel=stylesheet type="text/css" href="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(CmsWorkplace.getStyleUri(wp.getJsp())))%>workplace.css">
 
 <script >
 <!--
