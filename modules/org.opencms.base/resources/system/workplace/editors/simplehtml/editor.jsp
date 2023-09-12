@@ -231,7 +231,7 @@ if (options.showElement("button.customized", displayOptions)) {%>
 	<td><%= wp.buttonActionDirectEdit("buttonAction(9);", buttonStyle) %></td><%
 }
 %>
-<%= wp.button("javascript:buttonAction(7);", null, "save_exit", org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVECLOSE_0, buttonStyle) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:buttonAction(7);", null, "save_exit", org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVECLOSE_0, buttonStyle))) %>
 <%= wp.button("javascript:buttonAction(8);", null, "save",org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVE_0, buttonStyle) %>
 <%
 if (wp.isHelpEnabled()) {%>
