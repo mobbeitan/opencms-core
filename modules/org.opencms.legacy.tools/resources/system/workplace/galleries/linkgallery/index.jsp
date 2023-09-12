@@ -44,7 +44,7 @@ String uploadVariant = wp.getSettings().getUserSettings().getUploadVariant().toS
 <script  src="<%= jQueryResourcePath %>packed/thickbox.js"></script>
 <script  src="<%= jQueryResourcePath %>packed/jquery.ui.js"></script>
 
-<script  src="<%= wp.getJsp().link("../galleryelements/localization.js?locale=" + wp.getLocale()) %>"></script>
+<script  src="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getJsp().link("../galleryelements/localization.js?locale=" + wp.getLocale()))) %>"></script>
 <script  src="<%= galleryResourcePath %>js/jquery.jeditable.pack.js"></script>
 <script  src="<%= galleryResourcePath %>js/jquery.jHelperTip.1.0.min.js"></script>
 <script  src="<%= galleryResourcePath %>js/galleryfunctions.js"></script>
