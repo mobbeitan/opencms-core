@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*
 " %><%
@@ -6,7 +7,7 @@
 	CmsDialog wp = CmsDialog.initCmsDialog(pageContext, request, response);
 	wp.setParamAction(CmsDialog.DIALOG_WAIT);
 
-%><%= wp.htmlStart() %>
+%><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart())) %>
 
 <script >
 function submitForm() {
