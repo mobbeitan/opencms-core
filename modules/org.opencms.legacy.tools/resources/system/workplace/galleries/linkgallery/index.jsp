@@ -93,7 +93,7 @@ var uploadVariant = '<%=uploadVariant %>';
 		%> 
 	</div> <!-- close tag for jquery tabs -->
 	<div id="closebutton">
-		<button type="button" onclick="window.close();"><%= wp.key(Messages.GUI_GALLERY_BUTTON_CLOSE_0) %></button>
+		<button type="button" onclick="window.close();"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_GALLERY_BUTTON_CLOSE_0))) %></button>
 	</div>
 	<!-- The dialog html for the search dialog -->
 	<%@ include file="%(link.strong:/system/workplace/galleries/galleryelements/searchdialog.html:01f57eeb-5f28-11de-8c07-2d12956623b5)" %>
