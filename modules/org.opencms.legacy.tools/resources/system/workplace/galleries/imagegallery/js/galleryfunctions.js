@@ -131,7 +131,7 @@ function fillCategories(data) {
 		if (currCat.level > 0) {
 			actStyle = " style=\"margin-left: " + (currCat.level * 20) + "px;\"";
 		}
-		$("#categoryfolderlist").append("<div id=\""
+		$("#categoryfolderlist").append(DOMPurify.sanitize("<div id=\""
 			+ "category" + i
 			+ "\""
 			+ actClass
@@ -145,7 +145,7 @@ function fillCategories(data) {
 			+ currCat.title
 			+ "</span><span class=\"path\">"
 			+ currCat.path
-			+ "</span></div>"
+			+ "</span></div>")
 		);
 	}
 	categoriesLoaded = true;
@@ -167,7 +167,7 @@ function fillGalleries(data, showActiveGallery) {
 			// this is the active gallery, set active class
 			actClass = " class=\"active\"";
 		}
-		$("#galleryfolderlist").append("<div id=\""
+		$("#galleryfolderlist").append(DOMPurify.sanitize("<div id=\""
 			+ "gallery" + i
 			+ "\""
 			+ actClass
@@ -180,7 +180,7 @@ function fillGalleries(data, showActiveGallery) {
 			+ currGall.title
 			+ "</span><span class=\"path\">"
 			+ currGall.path
-			+ "</span></div>"
+			+ "</span></div>")
 		);
 		if ((showActiveGallery == null || showActiveGallery == true) && currGall.active == true) {
 			// this is the active gallery, get the items for this gallery

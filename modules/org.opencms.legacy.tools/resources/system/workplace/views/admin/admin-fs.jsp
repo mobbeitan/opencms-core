@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
         org.opencms.workplace.*,
         org.opencms.workplace.administration.*,
@@ -26,7 +27,7 @@
 <html>
 <head>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html;" charset=<%= wp.getEncoding() %>">
-<title><%= wp.key("label.wptitle") %> <%= wp.getSettings().getUser().getName() %>@<%= request.getServerName() %></title>
+<title><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("label.wptitle"))) %> <%= wp.getSettings().getUser().getName() %>@<%= request.getServerName() %></title>
 
 <script ><!--
 var _context = "";
@@ -35,8 +36,8 @@ var _context = "";
 </head>
 	<frameset cols="<%=(wp.withMenu()?(sb?"236,":"212,"):"")%>*" border="0" frameborder="0" framespacing="0">
 <%    if (wp.withMenu()) { %>                
-		<frame <%= wp.getFrameSource("admin_menu", jsp.link("admin-menu.jsp") + params) %> frameborder="0" border="0" noresize scrolling="<%=sb?"yes":"auto"%>">
+		<frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_menu", jsp.link("admin-menu.jsp") + params))) %> frameborder="0" border="0" noresize scrolling="<%=sb?"yes":"auto"%>">
 <%    } %>
-		<frame <%= wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + params) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
+		<frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + params))) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
 	</frameset>
 </html>

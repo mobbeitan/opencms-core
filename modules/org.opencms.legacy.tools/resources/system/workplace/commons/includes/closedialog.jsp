@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.*" %><%
 	
 	// get workplace class from request attribute
@@ -5,7 +6,7 @@
 	
 	boolean link = (wp.getParamCloseLink() != null) && org.opencms.util.CmsRequestUtil.checkBacklink(wp.getParamCloseLink(), request);
 
- %><%= wp.htmlStart() %>
+ %><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart())) %>
 <script >
 <!--
 <% if (link) { %>
@@ -31,4 +32,4 @@ if (isWp) {
 </script>
 <body>
 </body>
-<%= wp.htmlEnd() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
