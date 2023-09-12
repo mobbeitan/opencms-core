@@ -90,7 +90,7 @@ function checkName() {
 </tr>
 </table>
 
-<%= wp.dialogSubheadline(wp.key(Messages.GUI_PROPERTIES_ACTIVE_0)) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.dialogSubheadline(wp.key(Messages.GUI_PROPERTIES_ACTIVE_0)))) %>
 
 <%= wp.dialogWhiteBoxStart() %>
 <%= wp.buildActivePropertiesList() %>
