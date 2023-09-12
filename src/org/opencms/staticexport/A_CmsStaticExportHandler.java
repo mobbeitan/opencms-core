@@ -414,6 +414,7 @@ public abstract class A_CmsStaticExportHandler implements I_CmsStaticExportHandl
                                     + rfsName.substring(
                                         OpenCms.getStaticExportManager().getRfsPrefix(vfsName).length()));
                             try {
+                                ensurePathIsRelative(exportFolderName);
                                 File exportFolder = new File(exportFolderName);
                                 // check if export folder exists, if so delete it
                                 if (exportFolder.exists() && exportFolder.canWrite()) {
@@ -512,6 +513,37 @@ public abstract class A_CmsStaticExportHandler implements I_CmsStaticExportHandl
                     res.getRootPath(),
                     (System.currentTimeMillis() - timer) + ""));
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
