@@ -47,6 +47,7 @@ import org.apache.commons.logging.Log;
 
 import org.dom4j.io.SAXWriter;
 import org.xml.sax.SAXException;
+import java.net.URI;
 
 /**
  * Wrapper to write exported OpenCms resources either to a .ZIP file or to the file system.<p>
@@ -233,6 +234,7 @@ public class CmsExportHelper {
     protected void writeFile2Rfs(CmsFile file, String name) throws IOException {
 
         String fileName = getRfsFileName(name);
+        ensurePathIsRelative(fileName);
         File rfsFile = new File(fileName);
         if (!rfsFile.getParentFile().exists()) {
             rfsFile.getParentFile().mkdirs();
@@ -241,6 +243,37 @@ public class CmsExportHelper {
         FileOutputStream rfsFileOut = new FileOutputStream(rfsFile);
         rfsFileOut.write(file.getContents());
         rfsFileOut.close();
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
