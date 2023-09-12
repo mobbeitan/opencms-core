@@ -132,7 +132,7 @@ function continueReport() {
 </script>
 
     <%= wp.bodyStart("empty", "style=\"background-color:/*begin-color ThreeDFace*/#f0f0f0/*end-color*/;\" onLoad=\"init();\"") %><%= wp.bodyEnd() %>
-    <%= wp.htmlEnd() %>
+    <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
 
 <%
 
