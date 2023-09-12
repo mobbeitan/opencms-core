@@ -41,7 +41,7 @@ default:
 
 <%= wp.dialogWhiteBoxStart() %>
 <div style="height: 450px; overflow: auto;">
-	<%= wp.getConfigurationContentStringValue(wp.NODE_TEXT) %>
+	<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getConfigurationContentStringValue(wp.NODE_TEXT))) %>
 </div>
 <%= wp.dialogWhiteBoxEnd() %>
 
