@@ -192,7 +192,7 @@ if (modeName.equals("text/html")) {
 	function confirmExit() {
 		if (contentDirty) {
 			// only ask if the content has been modified
-			if (confirm ("<%= wp.key(org.opencms.workplace.editors.Messages.GUI_EDITOR_MESSAGE_EXIT_0)%>")) {
+			if (confirm ("<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_EDITOR_MESSAGE_EXIT_0)))%>")) {
 				setContentDirty(false);
 				buttonAction(1);
 			}
