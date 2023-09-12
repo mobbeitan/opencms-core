@@ -263,7 +263,7 @@ if (modeName.equals("text/html")) {
 <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:buttonAction(5);", null, "redo", org.opencms.workplace.editors.Messages.GUI_BUTTON_REDO_0, buttonStyle))) %>
 <%= wp.buttonBarSeparator(5, 5) %>
 <td>
-	<select name="fontsize" onchange="setEditorFontSize(this.value);" title="<%= wp.key("GUI_EDITOR_SELECT_FONTSIZE_0") %>">
+	<select name="fontsize" onchange="setEditorFontSize(this.value);" title="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_SELECT_FONTSIZE_0"))) %>">
 		<option value="-">--<%= wp.key("GUI_EDITOR_SELECT_FONTSIZE_0") %>--</option>
 		<option value="10">10px</option>
 		<option value="11">11px</option>
