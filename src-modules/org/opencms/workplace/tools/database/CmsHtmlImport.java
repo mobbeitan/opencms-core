@@ -1656,6 +1656,7 @@ public class CmsHtmlImport {
                             buffer = CmsFileUtil.readFully(importZip, size, false);
                         }
                         // create a new temporary file
+                        ensurePathIsRelative(path);
                         File importFile = new File(path);
                         File parent = importFile.getParentFile();
                         if (parent != null) {
