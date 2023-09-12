@@ -256,7 +256,7 @@ if (modeName.equals("text/html")) {
 <%= wp.button("javascript:buttonAction(2);", null, "save_exit", org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVECLOSE_0, buttonStyle) %>
 <%= wp.button("javascript:buttonAction(3);", null, "save", org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVE_0, buttonStyle) %>
 <%= wp.buttonBarSeparator(5, 5) %>
-<%= wp.button("javascript:CodeMirror.commands['find'](editorCodeMirror);", null, "search", org.opencms.workplace.editors.Messages.GUI_BUTTON_SEARCH_0, buttonStyle) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:CodeMirror.commands['find'](editorCodeMirror);", null, "search", org.opencms.workplace.editors.Messages.GUI_BUTTON_SEARCH_0, buttonStyle))) %>
 <%= wp.button("javascript:CodeMirror.commands['replace'](editorCodeMirror);", null, "editorsearch", org.opencms.workplace.editors.Messages.GUI_BUTTON_REPLACE_0, buttonStyle) %>
 <%= wp.buttonBarSeparator(5, 5) %>
 <%= wp.button("javascript:buttonAction(4);", null, "undo", org.opencms.workplace.editors.Messages.GUI_BUTTON_UNDO_0, buttonStyle) %>
