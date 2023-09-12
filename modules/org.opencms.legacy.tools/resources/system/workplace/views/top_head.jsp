@@ -85,7 +85,7 @@
 <%= wp.buttonBarLabel(org.opencms.workplace.Messages.GUI_LABEL_PROJECT_0) %>
 
 <td>
-<form style="margin: 0; padding: 0;" name="wpProjectSelect" method="post" action="<%= cms.link(cms.getRequestContext().getUri()) %>">
+<form style="margin: 0; padding: 0;" name="wpProjectSelect" method="post" action="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link(cms.getRequestContext().getUri()))) %>">
 <div>
 <%= wp.getProjectSelect("name=\"wpProject\" onchange=\"document.forms.wpProjectSelect.submit()\"", "style=\"width:150px\"") %>
 <input type="hidden" name="<%= CmsFrameset.PARAM_WP_FRAME %>" value="head">
