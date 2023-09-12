@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	
 	org.opencms.workplace.*,
@@ -46,7 +47,7 @@ default:
 <%= wp.paramsAsHidden() %>
 <input type="hidden" name="<%= CmsDialog.PARAM_FRAMENAME %>" value="">
 
-<%= wp.key(org.opencms.workplace.commons.Messages.GUI_SYNCHRONIZATION_INFO_0) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.commons.Messages.GUI_SYNCHRONIZATION_INFO_0))) %>
 
 <%= wp.dialogContentEnd() %>
 <%= wp.dialogButtonsOkCancel() %>
