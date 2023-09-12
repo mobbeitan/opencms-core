@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*,
 	org.opencms.jsp.*"
@@ -24,7 +25,7 @@ if (wp.isReloadRequired()) {
 		<title><%= wp.key(org.opencms.workplace.Messages.GUI_LABEL_WPTITLE_1, new Object[]{wp.getSettings().getUser().getFullName()}) %></title>
 		<script  src="<%= CmsWorkplace.getSkinUri() %>commons/explorer.js"></script>
 		<script  src="<%= CmsWorkplace.getSkinUri() %>commons/ajax.js"></script>
-		<script  src="<%= cms.link("/system/workplace/views/top_js.jsp") %>"></script>
+		<script  src="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link("/system/workplace/views/top_js.jsp"))) %>"></script>
 	</head>
 	<frameset rows="24,*,24" border="0" frameborder="0" framespacing="0">
 	    <frame <%= wp.getFrameSource("head", cms.link("/system/workplace/views/top_head.jsp?wpFrame=head")) %> noresize scrolling="no">
