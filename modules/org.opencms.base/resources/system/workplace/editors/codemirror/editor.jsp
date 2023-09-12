@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.editors.codemirror.*,
 	org.opencms.jsp.*,
@@ -308,7 +309,7 @@ if (modeName.equals("text/html")) {
 		</span>
 	</a>
 </td>
-<%= wp.button("javascript:editorCodeMirror.setOption('lineWrapping', !editorCodeMirror.getOption('lineWrapping'));", null, wp.getEditorResourceUri() +"images/word_wrap.gif", "GUI_EDITOR_BUTTON_WORDWRAP_0", buttonStyle, "") %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:editorCodeMirror.setOption('lineWrapping', !editorCodeMirror.getOption('lineWrapping'));", null, wp.getEditorResourceUri() +"images/word_wrap.gif", "GUI_EDITOR_BUTTON_WORDWRAP_0", buttonStyle, ""))) %>
 <%
 if (wp.isHelpEnabled()) {%>
 	<%= wp.buttonBarSeparator(5, 5) %>
