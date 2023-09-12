@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Dialog for explorer views in the administration view.<p>
