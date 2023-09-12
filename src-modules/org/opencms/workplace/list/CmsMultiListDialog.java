@@ -34,6 +34,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Helper class for managing three lists on the same dialog.<p>
