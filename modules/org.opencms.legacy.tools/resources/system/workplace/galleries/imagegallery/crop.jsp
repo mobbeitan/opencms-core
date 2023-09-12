@@ -237,7 +237,7 @@ A_CmsAjaxGallery wp = new CmsAjaxImageGallery(pageContext, request, response);
 </head>
 <body>
 
-<div class="head"><%= wp.key(Messages.GUI_IMAGEGALLERY_CROP_HEADLINE_0) %></div>
+<div class="head"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_IMAGEGALLERY_CROP_HEADLINE_0))) %></div>
 
 <div class="imgbg">
 	<div class="container">
