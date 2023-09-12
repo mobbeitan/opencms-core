@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.CmsDialog,
                  org.opencms.file.*,
                  org.opencms.util.CmsUUID,
@@ -25,7 +26,7 @@ break;
 default:
 %>
 
-    <%= wp.htmlStart() %>
+    <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart())) %>
     <%= wp.bodyStart("Content Notification Confirmation") %>
     <%= wp.dialogStart() %>
     <%= wp.dialogContentStart("OpenCms content notification") %>
