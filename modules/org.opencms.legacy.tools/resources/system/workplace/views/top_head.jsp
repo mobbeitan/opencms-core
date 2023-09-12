@@ -82,7 +82,7 @@
 
 <%= wp.buttonBar(CmsWorkplace.HTML_START) %>
 <%= wp.buttonBarStartTab(0, 0) %>
-<%= wp.buttonBarLabel(org.opencms.workplace.Messages.GUI_LABEL_PROJECT_0) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.buttonBarLabel(org.opencms.workplace.Messages.GUI_LABEL_PROJECT_0))) %>
 
 <td>
 <form style="margin: 0; padding: 0;" name="wpProjectSelect" method="post" action="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link(cms.getRequestContext().getUri()))) %>">
