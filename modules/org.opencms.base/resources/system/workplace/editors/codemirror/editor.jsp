@@ -305,7 +305,7 @@ if (modeName.equals("text/html")) {
 <td style="vertical-align: top;">
 	<a href="#" onclick="javascript:editorCodeMirror.setOption('autoCloseBrackets', !editorCodeMirror.getOption('autoCloseBrackets'));editorCodeMirror.setOption('autoCloseTags', !editorCodeMirror.getOption('autoCloseTags'));if (closeClass == 'push') { closeClass = 'norm'; } else { closeClass = 'push'; }" class="button" title="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_BUTTON_AUTOCLOSE_0"))) %>">
 		<span unselectable="on" class="push" onmouseover="className='over'" onmouseout="className=closeClass" onmousedown="className='push'" onmouseup="className='over'">
-			<img class="button" src="<%= wp.getEditorResourceUri() %>images/autoclose.png" alt="<%= wp.key("GUI_EDITOR_BUTTON_AUTOCLOSE_0") %>"/>
+			<img class="button" src="<%= wp.getEditorResourceUri() %>images/autoclose.png" alt="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_BUTTON_AUTOCLOSE_0"))) %>"/>
 		</span>
 	</a>
 </td>
