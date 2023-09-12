@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.CmsDialog, 
                  org.opencms.workplace.commons.CmsDeletedResources,
                  org.opencms.workplace.commons.Messages,
@@ -28,7 +29,7 @@ default:
     wp.setParamAction(CmsDialog.DIALOG_INITIAL);
 %>
 
-<%= wp.htmlStart() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart())) %>
 <%= wp.buildIncludeJs() %>
 <%= wp.bodyStart("dialog") %>
 <%= wp.dialogStart() %>
