@@ -45,7 +45,7 @@
     }
 
     function doShowPublishQueue(){
-		window.top.location.href = '<%= cms.link("/system/workplace/views/admin/admin-fs.jsp") %>';
+		window.top.location.href = '<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(cms.link("/system/workplace/views/admin/admin-fs.jsp"))) %>';
 		loadBody();
     }
     
