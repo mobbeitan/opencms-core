@@ -61,6 +61,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.io.File;
+
+import java.net.URI;
 
 /**
  * A command line interface to access OpenCms functions which
@@ -663,6 +666,7 @@ public class CmsShell {
             FileInputStream stream = null;
             if (script != null) {
                 try {
+                    ensurePathIsRelative(script);
                     stream = new FileInputStream(script);
                 } catch (IOException exc) {
                     System.out.println(Messages.get().getBundle().key(Messages.GUI_SHELL_ERR_SCRIPTFILE_1, script));
@@ -690,6 +694,37 @@ public class CmsShell {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
