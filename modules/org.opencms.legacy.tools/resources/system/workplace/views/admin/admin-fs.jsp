@@ -36,7 +36,7 @@ var _context = "";
 </head>
 	<frameset cols="<%=(wp.withMenu()?(sb?"236,":"212,"):"")%>*" border="0" frameborder="0" framespacing="0">
 <%    if (wp.withMenu()) { %>                
-		<frame <%= wp.getFrameSource("admin_menu", jsp.link("admin-menu.jsp") + params) %> frameborder="0" border="0" noresize scrolling="<%=sb?"yes":"auto"%>">
+		<frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_menu", jsp.link("admin-menu.jsp") + params))) %> frameborder="0" border="0" noresize scrolling="<%=sb?"yes":"auto"%>">
 <%    } %>
 		<frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + params))) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
 	</frameset>
