@@ -134,7 +134,7 @@ if (wp.isHelpEnabled()) {
        
 <td style="width: 100%">&nbsp;</td>
 <%= wp.buttonBarSeparator(5, 0) %>
-<%= wp.button("javascript:doLogout()", null, "logout.png", org.opencms.workplace.Messages.GUI_BUTTON_EXIT_0, buttonStyle) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:doLogout()", null, "logout.png", org.opencms.workplace.Messages.GUI_BUTTON_EXIT_0, buttonStyle))) %>
 
 <% if (buttonStyle != 2) {%>
 
