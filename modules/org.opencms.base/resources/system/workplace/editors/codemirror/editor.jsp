@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.editors.codemirror.*,
 	org.opencms.jsp.*,
@@ -263,7 +264,7 @@ if (modeName.equals("text/html")) {
 <%= wp.buttonBarSeparator(5, 5) %>
 <td>
 	<select name="fontsize" onchange="setEditorFontSize(this.value);" title="<%= wp.key("GUI_EDITOR_SELECT_FONTSIZE_0") %>">
-		<option value="-">--<%= wp.key("GUI_EDITOR_SELECT_FONTSIZE_0") %>--</option>
+		<option value="-">--<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_SELECT_FONTSIZE_0"))) %>--</option>
 		<option value="10">10px</option>
 		<option value="11">11px</option>
 		<option value="12">12px</option>
