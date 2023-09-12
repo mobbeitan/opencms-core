@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.util.*,
 	org.opencms.workplace.*,
@@ -42,7 +43,7 @@ default:
 
 	wp.setParamAction(CmsDialogElements.DIALOG_UPDATE_ELEMENTS);
 
-%><%= wp.htmlStart(null, wp.getParamTitle()) %>
+%><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart(null, wp.getParamTitle()))) %>
 <script>
 <!--
 
