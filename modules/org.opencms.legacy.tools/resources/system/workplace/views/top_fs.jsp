@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*,
 	org.opencms.jsp.*"
@@ -21,7 +22,7 @@ if (wp.isReloadRequired()) {
 	<head>
 		<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<%= wp.getEncoding() %>">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title><%= wp.key(org.opencms.workplace.Messages.GUI_LABEL_WPTITLE_1, new Object[]{wp.getSettings().getUser().getFullName()}) %></title>
+		<title><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.Messages.GUI_LABEL_WPTITLE_1, new Object[]{wp.getSettings().getUser().getFullName()}))) %></title>
 		<script  src="<%= CmsWorkplace.getSkinUri() %>commons/explorer.js"></script>
 		<script  src="<%= CmsWorkplace.getSkinUri() %>commons/ajax.js"></script>
 		<script  src="<%= cms.link("/system/workplace/views/top_js.jsp") %>"></script>
