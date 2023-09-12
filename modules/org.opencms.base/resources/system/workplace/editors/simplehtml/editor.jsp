@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*,
 	org.opencms.workplace.editors.*,
@@ -227,7 +228,7 @@ if (options.showElement("option.properties", displayOptions)) {
 <%= wp.buttonBarStartTab(0, 5) %>
 <%
 if (options.showElement("button.customized", displayOptions)) {%>
-	<td><%= wp.buttonActionDirectEdit("buttonAction(9);", buttonStyle) %></td><%
+	<td><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.buttonActionDirectEdit("buttonAction(9);", buttonStyle))) %></td><%
 }
 %>
 <%= wp.button("javascript:buttonAction(7);", null, "save_exit", org.opencms.workplace.editors.Messages.GUI_BUTTON_SAVECLOSE_0, buttonStyle) %>
