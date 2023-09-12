@@ -25,6 +25,6 @@
 		<frame <%= wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + "?" + wp.allParamsAsRequest()) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
 	</frameset>
 <%  } %>
-      <frame <%= wp.getFrameSource("admin_foot", jsp.link("/system/workplace/views/top_foot.jsp")) %> noresize scrolling="no">
+      <frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_foot", jsp.link("/system/workplace/views/top_foot.jsp")))) %> noresize scrolling="no">
    </frameset>
 </html>
