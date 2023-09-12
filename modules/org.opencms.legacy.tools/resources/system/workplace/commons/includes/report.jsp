@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.CmsReport,
 	org.opencms.workplace.CmsDialog,
@@ -366,7 +367,7 @@ function updateReport() {
     		pageBody = 
     			pageStartSimple + 
     			"<span class='head'>" + lastHeadline + "</span><br>\n" +
-    			"<%= wp.key(Messages.RPT_ERROR_0) %> " + lastError + "<br>\n" +
+    			"<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.RPT_ERROR_0))) %> " + lastError + "<br>\n" +
     			"<%= wp.key(Messages.RPT_ERROR_DETAILS_0) %>" + 
     			pageEndSimple;
     	} else {
