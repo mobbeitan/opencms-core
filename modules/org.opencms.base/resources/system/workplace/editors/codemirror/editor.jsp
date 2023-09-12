@@ -295,7 +295,7 @@ if (modeName.equals("text/html")) {
 	</a>
 </td>
 <td style="vertical-align: top;">
-	<a href="#" onclick="javascript:buttonAction(7);" class="button" title="<%= wp.key("GUI_EDITOR_BUTTON_VISIBLETABS_0") %>">
+	<a href="#" onclick="javascript:buttonAction(7);" class="button" title="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_BUTTON_VISIBLETABS_0"))) %>">
 		<span unselectable="on" class="norm" onmouseover="className='over'" onmouseout="className=tabsClass" onmousedown="className='push'" onmouseup="className='over'">
 			<img class="button" src="<%= wp.getEditorResourceUri() %>images/visibletabs.png" alt="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key("GUI_EDITOR_BUTTON_VISIBLETABS_0"))) %>"/>
 		</span>
