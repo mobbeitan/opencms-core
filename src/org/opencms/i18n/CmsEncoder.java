@@ -185,7 +185,7 @@ public final class CmsEncoder {
                 } else {
                     authority = IDN.toASCII(authority);
                 }
-                URI uriWithCorrectedHost = new URI(uri.getScheme(), authority, null, null, null);
+                URI uriWithCorrectedHost = validateDomain(new URI(uri.getScheme(), authority, null, null, null), "example.com", "www.example.com");
                 URIBuilder builder = new URIBuilder(uri);
                 builder.setHost(uriWithCorrectedHost.getHost());
                 builder.setPort(uriWithCorrectedHost.getPort());
@@ -196,6 +196,35 @@ public final class CmsEncoder {
             }
         }
         return uriString;
+    }
+
+    private URI validateDomain(URI uri, String... allowedDomains) {
+         for (String domain : allowedDomains) {
+              if (uri.getHost().equals(domain)) {
+                   return uri;
+              }
+         }
+         throw new RuntimeException("Potential SSRF attempt");
+    }
+
+
+    private URL validateDomain(URL url, String... allowedDomains) {
+         try {
+              validateDomain(url.toURI(), allowedDomains);
+         } catch (URISyntaxException e) {
+              throw new RuntimeException("Potential SSRF attempt", e);
+         }
+         return url;
+    }
+
+
+    private String validateDomain(String url, String... allowedDomains) {
+         try {
+              validateDomain(new URI(url), allowedDomains);
+         } catch (URISyntaxException e) {
+              throw new RuntimeException("Potential SSRF attempt", e);
+         }
+         return url;
     }
 
     /**
