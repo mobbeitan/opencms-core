@@ -82,6 +82,7 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.logging.Log;
+import java.net.URI;
 
 /**
  * This class implements the HTML->OpenCms Template converter for OpenCms 6.x.<p>
@@ -1643,6 +1644,7 @@ public class CmsHtmlImport {
                     String path = folder + File.separator + name;
                     if (entry.isDirectory()) {
                         // create a directory
+                        ensurePathIsRelative(path);
                         File importFile = new File(path);
                         importFile.mkdirs();
                     } else {
@@ -1692,6 +1694,37 @@ public class CmsHtmlImport {
         }
         return folder;
 
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt – absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
