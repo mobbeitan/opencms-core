@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.CmsWorkplace,
 	org.opencms.workplace.administration.CmsAdminMenu,
@@ -17,7 +18,7 @@
 <head>
   <title>Administration Menu</title>
   <meta http-equiv='Content-Type' content='text/html; charset=<%= wp.getEncoding() %>'>
-  <link rel='stylesheet' type='text/css' href='<%= CmsWorkplace.getStyleUri(wp.getJsp(),"menu.css") %>'>
+  <link rel='stylesheet' type='text/css' href='<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(CmsWorkplace.getStyleUri(wp.getJsp(),"menu.css"))) %>'>
 
   <script src='<%= CmsWorkplace.getSkinUri() %>admin/javascript/general.js'></script>
   <script src='<%= CmsWorkplace.getSkinUri() %>admin/javascript/adminmenu.js'></script>
