@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.util.*,
 	org.opencms.workplace.*,
@@ -22,7 +23,7 @@ case CmsDialogElements.ACTION_UPDATE_ELEMENTS:
 	<script>
 		function closeAction() {
 			this.elemName = "<%= wp.getChangeElement() %>";
-			this.elemLocale = "<%= wp.getElementLocale() %>";
+			this.elemLocale = "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getElementLocale())) %>";
 		}
 		var closeObj = new closeAction();
 		if (window.opener.popupCloseAction) {
