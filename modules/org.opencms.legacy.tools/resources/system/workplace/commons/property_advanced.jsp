@@ -202,7 +202,7 @@ function deleteResEntry(propName, activeTab) {
 
 // called on the onBlur event of an input field
 function checkResEntry(propName, activeTab) {
-	if (activeTab == "<%= wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0) %>") {
+	if (activeTab == "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0))) %>") {
 		// check only in "shared properties" form
 		var newVal = document.getElementById("<%= wp.PREFIX_VALUE %>"+propName).value;
 		var resVal = document.getElementById("<%= wp.PREFIX_RESOURCE %>"+propName).value;
