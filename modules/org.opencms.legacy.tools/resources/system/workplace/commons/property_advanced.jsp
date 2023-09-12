@@ -156,7 +156,7 @@ function toggleDelete(propName, prefix, activeTab) {
 	} else {
 		// box has been unchecked 
 		var resValue = document.getElementById("<%= wp.PREFIX_RESOURCE %>"+propName).value;
-		if (activeTab == "<%= wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0) %>" && resValue.length > 0) {
+		if (activeTab == "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0))) %>" && resValue.length > 0) {
 			// in "shared properties" form, show resource value if present			
 			field.className = "dialogmarkedfield";
 			m_field = field;
