@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.editors.codemirror.*,
 	org.opencms.jsp.*,
@@ -83,7 +84,7 @@ default:
 <meta http-equiv="content-type" content="text/html; charset=<%= wp.getEncoding() %>">
 <title>(<%= wp.getSettings().getUser().getName() %>) - <%= wp.getParamResource() %></title>
 
-<link rel=stylesheet type="text/css" href="<%= wp.getStyleUri("workplace.css") %>">
+<link rel=stylesheet type="text/css" href="<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getStyleUri("workplace.css"))) %>">
 <link rel="stylesheet" type="text/css" href="<%= wp.getEditorResourceUri() %>dist/lib/codemirror.css">
 <link rel="stylesheet" type="text/css" href="<%= wp.getEditorResourceUri() %>dist/theme/eclipse.css">
 <link rel="stylesheet" href="<%= wp.getEditorResourceUri() %>dist/addon/dialog/dialog.css">
