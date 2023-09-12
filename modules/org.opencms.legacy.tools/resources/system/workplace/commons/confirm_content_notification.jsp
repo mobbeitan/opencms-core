@@ -69,7 +69,7 @@ default:
     }
 %>   
 
-    <%= wp.key(key, new Object[]{resource}) %>
+    <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(key, new Object[]{resource}))) %>
     <%= wp.dialogContentEnd() %>
     <%= wp.dialogButtonsClose() %>
 </form>
