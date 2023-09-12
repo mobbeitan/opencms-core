@@ -246,7 +246,7 @@ function checkField(elementId, checkFieldId) {
       </select>
 </tr>
 <tr>
-  <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_TBGCOLOR_0) %>:</td>
+  <td style="white-space: nowrap;"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_TBGCOLOR_0))) %>:</td>
   <td><input type="text" id="TBGColor" size=7 maxlength="7" name="TBGColor" style="width:150px;" onkeyup="previewColor('TBGColor', 'TBGColor');"></td>
   <td><table border="0" cellpadding="0" cellspacing="0">
   		<tr>
