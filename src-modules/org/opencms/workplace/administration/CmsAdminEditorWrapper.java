@@ -39,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Workplace class for /system/workplace/views/admin/admin-editor.jsp .<p>
