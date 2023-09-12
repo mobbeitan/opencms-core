@@ -28,7 +28,7 @@ if (wp.isReloadRequired()) {
 		<script  src="<%= cms.link("/system/workplace/views/top_js.jsp") %>"></script>
 	</head>
 	<frameset rows="24,*,24" border="0" frameborder="0" framespacing="0">
-	    <frame <%= wp.getFrameSource("head", cms.link("/system/workplace/views/top_head.jsp?wpFrame=head")) %> noresize scrolling="no">
+	    <frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("head", cms.link("/system/workplace/views/top_head.jsp?wpFrame=head")))) %> noresize scrolling="no">
 	    <frame <%= wp.getFrameSource("body", wp.getStartupUri()) %> noresize scrolling="no">
 	    <frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("foot", cms.link("/system/workplace/views/top_foot.jsp?wpFrame=foot")))) %> noresize scrolling="no">
 	</frameset>
