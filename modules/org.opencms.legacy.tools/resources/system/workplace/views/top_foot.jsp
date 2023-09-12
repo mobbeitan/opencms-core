@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="
 	org.opencms.workplace.*,
 	org.opencms.jsp.*,
@@ -45,7 +46,7 @@ Long attrTimeWarp = (Long)session.getAttribute(CmsContextInfo.ATTRIBUTE_REQUEST_
 if (attrTimeWarp != null) { %>
 <td>
 	<div class="timewarp">
-		<%= wp.key(org.opencms.workplace.commons.Messages.GUI_LABEL_TIMEWARP_0) %>: <%= CmsDateUtil.getDateTime(new Date(attrTimeWarp.longValue()), DateFormat.SHORT, cms.getRequestContext().getLocale()) %>
+		<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.commons.Messages.GUI_LABEL_TIMEWARP_0))) %>: <%= CmsDateUtil.getDateTime(new Date(attrTimeWarp.longValue()), DateFormat.SHORT, cms.getRequestContext().getLocale()) %>
 	</div>
 </td><%
 } %>
