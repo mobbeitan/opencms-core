@@ -120,7 +120,7 @@ if (wp.showSiteSelector()) {
 </form></td>
 
 <%= wp.buttonBarSeparator(5, 0) %>
-<%= wp.button("javascript:doReload()", null, "reload.png", org.opencms.workplace.Messages.GUI_BUTTON_RELOAD_0, buttonStyle) %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.button("javascript:doReload()", null, "reload.png", org.opencms.workplace.Messages.GUI_BUTTON_RELOAD_0, buttonStyle))) %>
 <%= wp.getPreferencesButton() %>
 
 <% 
