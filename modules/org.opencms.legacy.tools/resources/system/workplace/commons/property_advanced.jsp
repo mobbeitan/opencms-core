@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.commons.*" %><%	
 
 	// initialize the workplace class
@@ -59,7 +60,7 @@ case CmsPropertyAdvanced.ACTION_SHOW_DEFINE:
 	wp.actionEdit(request);
 	wp.setParamAction(wp.DIALOG_SAVE_DEFINE);
 	
-%><%= wp.htmlStart("help.explorer.contextmenu.properties", wp.getParamTitle()) %>
+%><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlStart("help.explorer.contextmenu.properties", wp.getParamTitle()))) %>
 <script >
 <!--
 function checkName() {
