@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page session="false" import="
 	org.opencms.jsp.*,
 	org.opencms.workplace.administration.*,
@@ -21,7 +22,7 @@
 <%  } else { %>
 	<frameset cols="212,*" border="0" frameborder="0" framespacing="0">
 		<frame <%= wp.getFrameSource("admin_menu", jsp.link("admin-menu.jsp") + "?" + wp.allParamsAsRequest()) %> frameborder="0" border="0" noresize scrolling="auto">
-		<frame <%= wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + "?" + wp.allParamsAsRequest()) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
+		<frame <%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.getFrameSource("admin_content", jsp.link(CmsToolManager.VIEW_JSPPAGE_LOCATION) + "?" + wp.allParamsAsRequest()))) %> frameborder="0" border="0" framespacing="0" marginheight="7" marginwidth="7" noresize scrolling="auto">
 	</frameset>
 <%  } %>
       <frame <%= wp.getFrameSource("admin_foot", jsp.link("/system/workplace/views/top_foot.jsp")) %> noresize scrolling="no">
