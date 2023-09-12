@@ -193,7 +193,7 @@ function checkValue(propName, activeTab) {
 // called on the onFocus event of an input field
 function deleteResEntry(propName, activeTab) {
 	var field = document.getElementById("<%= wp.PREFIX_VALUE %>"+propName);
-	if (activeTab == "<%= wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0) %>" && field.className == "dialogmarkedfield") {
+	if (activeTab == "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0))) %>" && field.className == "dialogmarkedfield") {
 		// clear field to allow individual input
 		field.value = "";
 		field.className = "maxwidth";
