@@ -37,7 +37,7 @@
 %>    
     function doLogout() {
     	var windowCoords = calculateWinCoords();
-    	window.top.location.href = "<%= exitLink %>&<%= CmsLogin.PARAM_WPDATA %>=" + windowCoords;
+    	window.top.location.href = "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(exitLink)) %>&<%= CmsLogin.PARAM_WPDATA %>=" + windowCoords;
     }
 
     function doReload() {
