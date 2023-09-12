@@ -236,7 +236,7 @@ function checkField(elementId, checkFieldId) {
       </select>
 </tr>
 <tr>
-  <td style="white-space: nowrap;"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGN_0)%>: </td>
+  <td style="white-space: nowrap;"><%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGN_0)))%>: </td>
   <td colspan="2"><select name="TDVAlign" id="TDVAlign" size="1" style="width:150px;">
         <option value=""><%= wp.key(org.opencms.workplace.editors.Messages.GUI_EDITOR_DIALOG_TABLE_NOTSPECIFIED_0) %></option>
         <option value="top"><%= wp.key(org.opencms.workplace.editors.Messages.GUI_INPUT_VALIGNTOP_0) %></option>
