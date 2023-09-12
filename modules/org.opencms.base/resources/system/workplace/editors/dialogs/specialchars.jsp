@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
 <%@ page import="org.opencms.workplace.*" %><%	
 
 	// initialize the workplace class
@@ -238,4 +239,4 @@ function insertChar(thechar) {
 
 <%= wp.dialogEnd() %>
 <%= wp.bodyEnd() %>
-<%= wp.htmlEnd() %>
+<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.htmlEnd())) %>
