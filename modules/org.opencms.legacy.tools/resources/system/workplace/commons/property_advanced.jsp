@@ -146,7 +146,7 @@ function toggleDelete(propName, prefix, activeTab) {
 	field.value = "";
 	if (checked == true) {
 		// box has been checked, check style and get value from hidden field
-		if (activeTab == "<%= wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0) %>" && field.className == "dialogmarkedfield") {
+		if (activeTab == "<%= HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(wp.key(Messages.GUI_PROPERTIES_INDIVIDUAL_0))) %>" && field.className == "dialogmarkedfield") {
 			field.className = "maxwidth";
 		}
 		m_field = field;
