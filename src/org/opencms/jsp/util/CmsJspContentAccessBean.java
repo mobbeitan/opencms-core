@@ -851,7 +851,7 @@ public class CmsJspContentAccessBean {
                 if (key instanceof Locale) {
                     locale = (Locale)key;
                 } else {
-                    locale = CmsLocaleManager.getLocale("" + key);
+                    locale = CmsLocaleManager.getLocale("" + String.valueOf(key).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", ""));
                 }
                 if (content.hasLocale(locale)) {
                     CmsJsonRendererXmlContent renderer;
