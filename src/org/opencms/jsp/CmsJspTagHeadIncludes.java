@@ -672,7 +672,7 @@ public class CmsJspTagHeadIncludes extends BodyTagSupport implements I_CmsJspTag
                 }
             }
         }
-        String result = target + (queryParts.isEmpty() ? "" : "?" + Joiner.on("&").join(queryParts));
+        String result = String.valueOf(target).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "") + (queryParts.isEmpty() ? "" : "?" + Joiner.on("&").join(queryParts));
         return result;
     }
 
