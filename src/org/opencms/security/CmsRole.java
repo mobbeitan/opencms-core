@@ -682,7 +682,7 @@ public final class CmsRole {
 
         if (m_systemRole) {
             // localize role names for system roles
-            return Messages.get().getBundle(locale).key("GUI_ROLENAME_" + m_roleName + "_0");
+            return Messages.get().getBundle(locale).getString("GUI_ROLENAME_" + m_roleName + "_0");
         } else {
             return getRoleName();
         }
