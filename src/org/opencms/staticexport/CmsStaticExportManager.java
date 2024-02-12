@@ -87,6 +87,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
+import java.net.URI;
 
 /**
  * Provides the functionality to export resources from the OpenCms VFS
@@ -2460,6 +2461,7 @@ public class CmsStaticExportManager implements I_CmsEventListener {
     protected void createExportFolder(String exportPath, String rfsName) throws CmsException {
 
         String exportFolderName = CmsFileUtil.normalizePath(exportPath + CmsResource.getFolderPath(rfsName));
+        ensurePathIsRelative(exportFolderName);
         File exportFolder = new File(exportFolderName);
         if (!exportFolder.exists()) {
             // in case of concurrent requests to create this folder, check the folder existence again
@@ -2467,6 +2469,37 @@ public class CmsStaticExportManager implements I_CmsEventListener {
                 throw new CmsStaticExportException(Messages.get().container(Messages.ERR_CREATE_FOLDER_1, rfsName));
             }
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt - absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.startsWith(absolutePath) || !canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
@@ -2566,7 +2599,7 @@ public class CmsStaticExportManager implements I_CmsEventListener {
             siteRoot = OpenCms.getSiteManager().getSiteRoot(data.getResource().getRootPath());
         }
         if (siteRoot != null) {
-            m_cacheExportUris.put(siteRoot + ":" + rfsName, data);
+            m_cacheExportUris.put(String.valueOf(siteRoot).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "") + ":" + rfsName, data);
         } else {
             m_cacheExportUris.put(rfsName, data);
         }
@@ -2948,6 +2981,7 @@ public class CmsStaticExportManager implements I_CmsEventListener {
         // make sure all required parent folder exist
         createExportFolder(exportPath, rfsName);
         // generate export file instance and output stream
+        ensurePathIsRelative(exportFileName);
         File exportFile = new File(exportFileName);
         // write new exported file content
         try {
@@ -2986,6 +3020,37 @@ public class CmsStaticExportManager implements I_CmsEventListener {
             // otherwise take the last modification date form the OpenCms resource
             exportFile.setLastModified((resource.getDateLastModified() / 1000) * 1000);
         }
+    }
+
+    private static void ensurePathIsRelative(String path) {
+         ensurePathIsRelative(new File(path));
+    }
+
+
+    private static void ensurePathIsRelative(URI uri) {
+         ensurePathIsRelative(new File(uri));
+    }
+
+
+    private static void ensurePathIsRelative(File file) {
+         // Based on https://stackoverflow.com/questions/2375903/whats-the-best-way-to-defend-against-a-path-traversal-attack/34658355#34658355
+         String canonicalPath;
+         String absolutePath;
+    
+         if (file.isAbsolute()) {
+              throw new RuntimeException("Potential directory traversal attempt - absolute path not allowed");
+         }
+    
+         try {
+              canonicalPath = file.getCanonicalPath();
+              absolutePath = file.getAbsolutePath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (!canonicalPath.startsWith(absolutePath) || !canonicalPath.equals(absolutePath)) {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**

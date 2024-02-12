@@ -147,6 +147,25 @@ public final class CmsResourceBundleLoader {
             m_locale = l;
             m_hashcode = m_baseName.hashCode() ^ m_locale.hashCode();
         }
+        public BundleKey(String baseName, Locale locale) {
+            m_baseName = baseName;
+            m_locale = locale;
+            m_hashcode = baseName.hashCode() + locale.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            return m_hashcode;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof BundleKey) {
+                BundleKey other = (BundleKey)obj;
+                return m_baseName.equals(other.m_baseName) && m_locale.equals(other.m_locale);
+            }
+            return false;
+        }
     }
 
     /**  The resource bundle cache. */
@@ -317,43 +336,40 @@ public final class CmsResourceBundleLoader {
         }
 
         // This will throw NullPointerException if any arguments are null.
-        BundleKey m_lookupKey = new BundleKey(baseName, locale);
+        BundleKey lookupKey = new BundleKey(baseName, locale);
 
-        Object obj = m_bundleCache.get(m_lookupKey);
-
-        if (obj instanceof ResourceBundle) {
-            return (ResourceBundle)obj;
-        } else if (obj == NULL_ENTRY) {
-            // Lookup has failed previously. Fall through.
-        } else {
-            synchronized (m_bundleCache) {
-                obj = m_bundleCache.get(m_lookupKey);
-                if (obj instanceof ResourceBundle) {
-                    // check the bundle again
-                    return (ResourceBundle)obj;
-                }
-                // First, look for a bundle for the specified locale. We don't want
-                // the base bundle this time.
-                boolean wantBase = locale.equals(m_lastDefaultLocale);
-                ResourceBundle bundle = tryBundle(baseName, locale, wantBase);
-
-                // Try the default locale if necessary
-                if ((bundle == null) && !locale.equals(m_lastDefaultLocale)) {
-                    bundle = tryBundle(baseName, m_lastDefaultLocale, true);
-                }
-
-                BundleKey key = new BundleKey(baseName, locale);
-                if (bundle != null) {
-                    // Cache the result and return it.
-                    m_bundleCache.put(key, bundle);
-                    return bundle;
-                }
-            }
+        ResourceBundle cachedBundle = m_bundleCache.get(lookupKey);
+        if (cachedBundle != null) {
+            return cachedBundle;
         }
 
-        // unable to find the resource bundle with this implementation
+        // Lookup has failed previously. Fall through.
+        synchronized (m_bundleCache) {
+            cachedBundle = m_bundleCache.get(lookupKey);
+            if (cachedBundle != null) {
+                return cachedBundle;
+            }
+
+            // First, look for a bundle for the specified locale. We don't want
+                // the base bundle this time.
+            boolean wantBase = locale.equals(m_lastDefaultLocale);
+            ResourceBundle bundle = tryBundle(baseName, locale, wantBase);
+
+            // Try the default locale if necessary
+            if ((bundle == null) && !locale.equals(m_lastDefaultLocale)) {
+                bundle = tryBundle(baseName, m_lastDefaultLocale, true);
+            }
+
+            if (bundle != null) {
+                // Cache the result and return it.
+                m_bundleCache.put(lookupKey, bundle);
+                return bundle;
+            }
+
+            // unable to find the resource bundle with this implementation
         // use default Java mechanism to look up the bundle again
-        return ResourceBundle.getBundle(baseName, locale);
+            return ResourceBundle.getBundle(baseName, locale);
+        }
     }
 
     /**
@@ -362,16 +378,15 @@ public final class CmsResourceBundleLoader {
      * @param localizedName the name
      * @return the resource bundle if it was loaded, otherwise the backup
      */
-    private static I_CmsResourceBundle tryBundle(String localizedName) {
+    private static I_CmsResourceBundle tryBundle(String baseName) {
 
         I_CmsResourceBundle result = null;
 
         try {
-
-            String resourceName = localizedName.replace('.', '/') + ".properties";
+            String resourceName = baseName.replace('.', '/') + ".properties";
             URL url = CmsResourceBundleLoader.class.getClassLoader().getResource(resourceName);
 
-            I_CmsResourceBundle additionalBundle = m_permanentCache.get(localizedName);
+            I_CmsResourceBundle additionalBundle = m_permanentCache.get(baseName);
             if (additionalBundle != null) {
                 result = additionalBundle.getClone();
             } else if (url != null) {
@@ -401,8 +416,8 @@ public final class CmsResourceBundleLoader {
         } catch (IOException ex) {
             // can't localized these message since this may lead to a chicken-egg problem
             MissingResourceException mre = new MissingResourceException(
-                "Failed to load bundle '" + localizedName + "'",
-                localizedName,
+                "Failed to load bundle '" + baseName + "'",
+                baseName,
                 "");
             mre.initCause(ex);
             throw mre;
