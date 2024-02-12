@@ -70,7 +70,9 @@ public class CmsVfsDiskCache {
      * @throws IOException in case of disk access errors
      */
     public static File saveFile(String rfsName, byte[] content) throws IOException {
-
+        if (!rfsName.startsWith(m_rfsRepository)) {
+            throw new IllegalArgumentException("Invalid rfsName: " + rfsName);
+        }
         File f = new File(rfsName);
         File p = f.getParentFile();
         if (!p.exists()) {
@@ -78,9 +80,9 @@ public class CmsVfsDiskCache {
             p.mkdirs();
         }
         // write file contents
-        FileOutputStream fs = new FileOutputStream(f);
-        fs.write(content);
-        fs.close();
+        try (FileOutputStream fs = new FileOutputStream(f)) {
+            fs.write(content);
+        }
         return f;
     }
 
