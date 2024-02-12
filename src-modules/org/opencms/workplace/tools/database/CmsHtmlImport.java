@@ -1632,7 +1632,7 @@ public class CmsHtmlImport {
                     if (entry == null) {
                         break;
                     }
-                    String name = entry.getName();
+                    String name = getRelativePath(entry.getName());
                     // make a report for the user
                     m_report.print(Messages.get().container(Messages.RPT_HTML_UNZIP_0), I_CmsReport.FORMAT_NOTE);
                     m_report.print(
@@ -1692,6 +1692,24 @@ public class CmsHtmlImport {
         }
         return folder;
 
+    }
+
+    private static String getRelativePath(String path) {
+         String basePath;
+         String filePath;
+    
+         try {
+              basePath = new File(".").getCanonicalPath() + File.separator;
+              filePath = new File(path).getCanonicalPath();
+         } catch (IOException e) {
+              throw new RuntimeException("Potential directory traversal attempt", e);
+         }
+    
+         if (filePath.startsWith(basePath)) {
+              return filePath.substring(basePath.length());
+         } else {
+              throw new RuntimeException("Potential directory traversal attempt");
+         }
     }
 
     /**
