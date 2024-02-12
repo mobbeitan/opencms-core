@@ -232,7 +232,8 @@ public class CmsJspTagInclude extends BodyTagSupport implements I_CmsJspTagParam
             : new HashMap<String, String[]>(paramMap);
             if (cacheable && (element != null)) {
                 // add template element selector for JSP templates (only required if cacheable)
-                addParameter(parameterMap, I_CmsResourceLoader.PARAMETER_ELEMENT, element, true);
+                String validatedElement = CmsStringUtil.validateParameter(element);
+                addParameter(parameterMap, I_CmsResourceLoader.PARAMETER_ELEMENT, validatedElement, true);
             }
             // add parameters to set the correct element
             controller.getCurrentRequest().addParameterMap(parameterMap);
@@ -249,7 +250,7 @@ public class CmsJspTagInclude extends BodyTagSupport implements I_CmsJspTagParam
                 extendedParameterMap = Maps.newHashMap();
                 extendedParameterMap.putAll(parameterMap);
                 for (String dynamicParam : dynamicParams) {
-                    String[] val = req.getParameterMap().get(dynamicParam);
+                    String[] val = CmsRequestUtil.validateParameterMap(req.getParameterMap().get(dynamicParam));
                     if (val != null) {
                         extendedParameterMap.put(dynamicParam, val);
                     }
