@@ -67,6 +67,9 @@ import org.apache.commons.logging.Log;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.errors.EncodingException;
+
 /**
  * Provides utility functions for dealing with values a <code>{@link HttpServletRequest}</code>.<p>
  *
@@ -684,6 +687,14 @@ public final class CmsRequestUtil {
         String result = request.getParameter(paramName);
         if (CmsStringUtil.isEmptyOrWhitespaceOnly(result)) {
             result = null;
+        }
+        else {
+            try {
+                result = ESAPI.encoder().canonicalize(result);
+            } catch (EncodingException e) {
+                LOG.error("Error while encoding user input", e);
+                result = null;
+            }
         }
         return result;
     }
