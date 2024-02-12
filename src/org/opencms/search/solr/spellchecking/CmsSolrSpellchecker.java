@@ -191,6 +191,9 @@ public final class CmsSolrSpellchecker {
     throws CmsPermissionViolationException, IOException {
 
         // Perform a permission check
+        if (cms == null) {
+            throw new IllegalArgumentException("CmsObject cannot be null");
+        }
         performPermissionCheck(cms);
 
         // Set the appropriate response headers
