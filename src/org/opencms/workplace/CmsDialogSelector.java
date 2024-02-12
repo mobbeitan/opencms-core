@@ -85,7 +85,7 @@ public class CmsDialogSelector {
 
         setJsp(jsp);
         setHandler(handler);
-        setParamResource(CmsEncoder.decode(jsp.getRequest().getParameter(CmsDialog.PARAM_RESOURCE)));
+        setParamResource(jsp.getRequest().getParameter(CmsDialog.PARAM_RESOURCE));
     }
 
     /**
@@ -172,8 +172,20 @@ public class CmsDialogSelector {
      * @param resource the resource parameter String
      */
     private void setParamResource(String resource) {
-
-        m_paramResource = resource;
+        if (resource != null) {
+            m_paramResource = CmsEncoder.decode(resource);
+        }
     }
 
+    private void setJsp(CmsJspActionElement jsp) {
+        m_jsp = jsp;
+    }
+
+    private void setHandler(String handler) {
+        m_handler = handler;
+    }
+
+    private String getHandler() {
+        return m_handler;
+    }
 }

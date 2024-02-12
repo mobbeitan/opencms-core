@@ -101,9 +101,15 @@ public class CmsAutoSetup {
             for (int i = 0; i < args.length; i++) {
                 if (args[i] != null) {
                     if (PARAM_CONFIG_PATH.equals(args[i]) && (args.length > (i + 1))) {
-                        path = args[i + 1];
+                        File file = new File(args[i + 1]);
+                        if (file.exists() && file.isFile()) {
+                            path = file.getAbsolutePath();
+                        }
                     } else if (args[i].startsWith(PARAM_CONFIG_PATH)) {
-                        path = args[i].substring(PARAM_CONFIG_PATH.length()).trim();
+                        File file = new File(args[i].substring(PARAM_CONFIG_PATH.length()).trim());
+                        if (file.exists() && file.isFile()) {
+                            path = file.getAbsolutePath();
+                        }
                     } else if (PARAM_DB_ONLY.equals(args[i])) {
                         setupDBOnly = true;
                     }

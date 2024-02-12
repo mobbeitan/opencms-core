@@ -110,6 +110,9 @@ public class CmsEditorSelector {
 
         // the resourcenameparameter could be encoded, so decode it
         String resource = getParamResource();
+        if (resource == null || resource.isEmpty()) {
+            throw new CmsWorkplaceException(Messages.get().container(Messages.ERR_NO_RESOURCE_FOUND_0));
+        }
         resource = CmsEncoder.unescape(resource, CmsEncoder.ENCODING_UTF_8);
         if (editorClass == null) {
             // error getting the dialog class, return to file list
