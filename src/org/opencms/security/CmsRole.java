@@ -479,7 +479,7 @@ public final class CmsRole {
             Messages.get().container(
                 Messages.ERR_USER_NOT_IN_ROLE_FOR_ORGUNIT_3,
                 requestContext.getCurrentUser().getName(),
-                getName(requestContext.getLocale()),
+                getSafeName(),
                 orgUnitFqn));
     }
 
@@ -678,14 +678,23 @@ public final class CmsRole {
      *
      * @return the localized role name
      */
-    public String getName(Locale locale) {
-
-        if (m_systemRole) {
-            // localize role names for system roles
-            return Messages.get().getBundle(locale).key("GUI_ROLENAME_" + m_roleName + "_0");
-        } else {
-            return getRoleName();
-        }
+    public String getSafeName() {
+        Map<String, String> roleNames = new HashMap<String, String>();
+        roleNames.put("ROOT_ADMIN", "Root Admin");
+        roleNames.put("WORKPLACE_MANAGER", "Workplace Manager");
+        roleNames.put("DATABASE_MANAGER", "Database Manager");
+        roleNames.put("ADMINISTRATOR", "Administrator");
+        roleNames.put("PROJECT_MANAGER", "Project Manager");
+        roleNames.put("ACCOUNT_MANAGER", "Account Manager");
+        roleNames.put("VFS_MANAGER", "VFS Manager");
+        roleNames.put("DEVELOPER", "Developer");
+        roleNames.put("WORKPLACE_USER", "Workplace User");
+        roleNames.put("LIST_EDITOR", "List Editor");
+        roleNames.put("GALLERY_EDITOR", "Gallery Editor");
+        roleNames.put("CATEGORY_EDITOR", "Category Editor");
+        roleNames.put("EDITOR", "Editor");
+        roleNames.put("ELEMENT_AUTHOR", "Element Author");
+        return roleNames.get(m_roleName);
     }
 
     /**
