@@ -681,11 +681,11 @@ public final class CmsRequestUtil {
      */
     public static String getNotEmptyParameter(HttpServletRequest request, String paramName) {
 
-        String result = request.getParameter(paramName);
-        if (CmsStringUtil.isEmptyOrWhitespaceOnly(result)) {
+        String[] result = request.getParameterValues(paramName);
+        if (result == null || result.length == 0 || result[0].isEmpty()) {
             result = null;
         }
-        return result;
+        return result != null ? result[0] : null;
     }
 
     /**

@@ -84,14 +84,16 @@ public class CmsVfsNameBasedDiskCache {
     public byte[] getCacheContent(String rfsName) {
 
         try {
-            File f = new File(rfsName);
-            if (f.exists()) {
-                long age = f.lastModified();
-                if ((System.currentTimeMillis() - age) > 3600000) {
-                    // file has not been touched for 1 hour, touch the file with the current date
-                    f.setLastModified(System.currentTimeMillis());
+            File f = CmsFileUtil.getFile(rfsName);
+            if (f != null && f.exists()) {
+                if (f.getCanonicalPath().startsWith(m_rfsRepository)) {
+                    long age = f.lastModified();
+                    if ((System.currentTimeMillis() - age) > 3600000) {
+                        // file has not been touched for 1 hour, touch the file with the current date
+                        f.setLastModified(System.currentTimeMillis());
+                    }
+                    return CmsFileUtil.readFile(f);
                 }
-                return CmsFileUtil.readFile(f);
             }
         } catch (IOException e) {
             // unable to read content

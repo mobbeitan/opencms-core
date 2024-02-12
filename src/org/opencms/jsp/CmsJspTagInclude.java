@@ -208,6 +208,7 @@ public class CmsJspTagInclude extends BodyTagSupport implements I_CmsJspTagParam
         }
 
         // resolve possible relative URI
+        target = target.replaceAll("[^a-zA-Z0-9/]+", "");
         target = CmsLinkManager.getAbsoluteUri(target, controller.getCurrentRequest().getElementUri());
 
         try {
