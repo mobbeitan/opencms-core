@@ -208,7 +208,7 @@ public class CmsJspTagInclude extends BodyTagSupport implements I_CmsJspTagParam
         }
 
         // resolve possible relative URI
-        target = CmsLinkManager.getAbsoluteUri(target, controller.getCurrentRequest().getElementUri());
+        target = CmsLinkManager.getAbsoluteUri(CmsStringUtil.escapeXml(target), controller.getCurrentRequest().getElementUri());
 
         try {
             // check if the target actually exists in the OpenCms VFS
