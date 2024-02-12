@@ -542,7 +542,7 @@ public class CmsResourceTypeConfig implements I_CmsConfigurationObject<CmsResour
             return m_namePattern;
         }
         if (useDefaultIfEmpty) {
-            return m_typeName + "-%(number).xml";
+            return String.valueOf(m_typeName).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "") + "-%(number).xml";
         }
         return null;
     }

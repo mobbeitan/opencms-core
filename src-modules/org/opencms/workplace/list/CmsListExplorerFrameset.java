@@ -110,7 +110,7 @@ public class CmsListExplorerFrameset extends CmsExplorerDialog {
         if (CmsStringUtil.isEmptyOrWhitespaceOnly(titleUri)) {
             titleUri = CmsToolManager.ADMINVIEW_ROOT_LOCATION + "/list-title.jsp";
         }
-        String titleSrc = getFrameSource("tool_title", getJsp().link(titleUri + "?" + params));
+        String titleSrc = getFrameSource("tool_title", getJsp().link(String.valueOf(titleUri).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "") + "?" + params));
         String contentSrc = getFrameSource(
             "tool_content",
             getJsp().link(CmsToolManager.ADMINVIEW_ROOT_LOCATION + "/list-explorer.jsp") + "?" + params);
