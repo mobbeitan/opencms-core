@@ -2566,7 +2566,7 @@ public class CmsStaticExportManager implements I_CmsEventListener {
             siteRoot = OpenCms.getSiteManager().getSiteRoot(data.getResource().getRootPath());
         }
         if (siteRoot != null) {
-            m_cacheExportUris.put(siteRoot + ":" + rfsName, data);
+            m_cacheExportUris.put(String.valueOf(siteRoot).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "") + ":" + rfsName, data);
         } else {
             m_cacheExportUris.put(rfsName, data);
         }
