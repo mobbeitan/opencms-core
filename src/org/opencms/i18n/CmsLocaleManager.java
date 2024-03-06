@@ -57,6 +57,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.cybozu.labs.langdetect.DetectorFactory;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Manages the locales configured for this OpenCms installation.<p>
@@ -305,7 +306,7 @@ public class CmsLocaleManager implements I_CmsEventListener {
                 result.add(basename);
             }
             if (wantDefaultAsBase) {
-                result.add(basename + "_" + getDefaultLocale().toString());
+                result.add(basename + "_" + HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(getDefaultLocale().toString())));
             }
             return result;
         }
