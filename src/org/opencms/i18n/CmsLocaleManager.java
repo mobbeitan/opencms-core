@@ -984,7 +984,7 @@ public class CmsLocaleManager implements I_CmsEventListener {
         Locale locale = null;
         String encoding = null;
         if (req != null) {
-            String localeParam = req.getParameter(CmsLocaleManager.PARAMETER_LOCALE);
+            String localeParam = validateUntrustedData(req.getParameter(CmsLocaleManager.PARAMETER_LOCALE), "[a-zA-Z0-9 ]+");
             // check request for parameters
             if (localeParam != null) {
                 // "__locale" parameter found in request
@@ -1018,6 +1018,16 @@ public class CmsLocaleManager implements I_CmsEventListener {
 
         // return the merged values
         return new CmsI18nInfo(locale, encoding);
+    }
+
+    private static String validateUntrustedData(String data, String pattern) {
+         if (data == null) {
+              return null;
+         }
+         if (data.matches(pattern)) {
+              return data;
+         }
+         throw new RuntimeException("Potential Trust Boundary Violation");
     }
 
     /**
@@ -1237,7 +1247,7 @@ public class CmsLocaleManager implements I_CmsEventListener {
                 // make sure not to add a profile twice
                 if (!languagesAdded.contains(lang)) {
                     languagesAdded.add(lang);
-                    String profileFile = "profiles" + "/" + lang;
+                    String profileFile = "profiles" + "/" + String.valueOf(lang).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", "");
                     InputStream is = getClass().getClassLoader().getResourceAsStream(profileFile);
                     if (is != null) {
                         String profile = IOUtils.toString(is, "UTF-8");
