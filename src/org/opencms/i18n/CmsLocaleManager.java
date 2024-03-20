@@ -306,7 +306,7 @@ public class CmsLocaleManager implements I_CmsEventListener {
                 result.add(basename);
             }
             if (wantDefaultAsBase) {
-                result.add(basename + "_" + HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(getDefaultLocale().toString())));
+                result.add(basename + "_" + String.valueOf(HtmlUtils.htmlEscape(HtmlUtils.htmlUnescape(getDefaultLocale().toString()))).replaceAll("([/\\\\:*?\"<>|])|(^\\s)|([.\\s]$)", "_").replaceAll("\0", ""));
             }
             return result;
         }
