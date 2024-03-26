@@ -11661,7 +11661,11 @@ public final class CmsDriverManager implements I_CmsEventListener {
         int updateState = 0;
         I_CmsVfsDriver vfsDriver = getVfsDriver(dbc);
         Iterator<CmsProperty> it = properties.iterator();
+        int counter = 0;
         while (it.hasNext() && (updateState < 2)) {
+            if(counter > 500)
+                break;
+            counter++;
             CmsProperty property = it.next();
 
             // read existing property
