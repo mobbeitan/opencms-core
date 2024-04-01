@@ -2542,7 +2542,11 @@ public class CmsContainerpageService extends CmsGwtService implements I_CmsConta
             settings.put(formatterKey, formatterConfigId);
             // remove not used formatter settings
             Iterator<Entry<String, String>> entries = settings.entrySet().iterator();
+            int counter = 0;
             while (entries.hasNext()) {
+                if(counter > 500)
+                    break;
+                counter++;
                 Entry<String, String> entry = entries.next();
                 if (entry.getKey().startsWith(CmsFormatterConfig.FORMATTER_SETTINGS_KEY)
                     && !entry.getKey().equals(formatterKey)) {
