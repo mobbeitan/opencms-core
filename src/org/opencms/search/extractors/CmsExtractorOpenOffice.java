@@ -38,6 +38,7 @@ import java.util.zip.ZipInputStream;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.xml.sax.SAXException;
 
 /**
  * Extracts the text from OpenOffice documents (.ods, .odf).<p>
@@ -103,6 +104,14 @@ public final class CmsExtractorOpenOffice extends A_CmsTextExtractor {
 
         StringBuffer resultBuffer = new StringBuffer();
         SAXReader reader = new SAXReader();
+        try {
+            reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        }
+        catch(SAXException e) {
+            throw new RuntimeException(e);
+        }
         Document doc = reader.read(in);
         List<Node> textlist = CmsXmlGenericWrapper.selectNodes(doc, "//text:p[@*] | //text:span[@*]");
         Iterator<Node> li = textlist.iterator();
